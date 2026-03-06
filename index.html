@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radhika | Midnight Celebration</title>
+    <title>Radhika | Midnight Onyx</title>
     
-    <!-- Premium Fonts -->
+    <!-- Premium Font Pairings -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@100;300;400&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -13,23 +13,20 @@
 
     <style>
         :root { 
-            --onyx: #0a0a0a; 
+            --black: #000000; 
             --gold: #c5a059; 
             --rose: #8e6d6d;
         }
         
-        body { background-color: var(--onyx); color: #f2f2f2; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        body { background-color: var(--black); color: #ffffff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
         .serif { font-family: 'Cormorant Garamond', serif; }
         .cursive { font-family: 'Dancing Script', cursive; }
 
-        /* Floating "Glass" Ornaments */
-        .ornament {
+        /* Raw Floating Stickers (No boxes, just shadows) */
+        .sticker {
             position: fixed; pointer-events: none; user-select: none; z-index: 1;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 12px; border-radius: 14px;
+            filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.4));
+            will-change: transform;
         }
 
         /* Luxury Gold Title Styling */
@@ -39,94 +36,93 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Section Layouts */
+        /* Layout Architecture */
         .chapter { height: 100vh; width: 100vw; position: relative; overflow: hidden; }
         .horizontal-wrapper { display: flex; width: 300vw; height: 100vh; will-change: transform; }
         .horiz-panel { width: 100vw; height: 100%; display: flex; align-items: center; justify-content: center; padding: 0 8vw; flex-shrink: 0; }
 
-        /* Photo Frames */
+        /* High-End Photo Frames */
         .photo-frame {
-            border: 1px solid rgba(197, 160, 89, 0.2);
-            padding: 12px; background: rgba(255,255,255,0.01);
-            box-shadow: 0 30px 60px -12px rgba(0,0,0,0.5);
+            border: 1px solid rgba(197, 160, 89, 0.15);
+            padding: 10px; background: rgba(255,255,255,0.01);
+            box-shadow: 0 40px 100px -20px rgba(0,0,0,0.8);
         }
 
         /* Custom Cursor */
-        #cursor { width: 30px; height: 30px; border: 1px solid var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 1000; mix-blend-mode: difference; }
+        #cursor { width: 25px; height: 25px; border: 1px solid var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 1000; mix-blend-mode: difference; }
 
-        /* Navigation Numbering */
-        .nav-indicator { position: fixed; left: 40px; bottom: 40px; font-size: 10px; letter-spacing: 0.8em; z-index: 50; color: var(--gold); opacity: 0.5; }
+        .nav-indicator { position: fixed; left: 40px; bottom: 40px; font-size: 10px; letter-spacing: 0.8em; z-index: 50; color: var(--gold); opacity: 0.4; }
     </style>
 </head>
-<body class="bg-[#0a0a0a]">
+<body class="bg-black">
 
     <div id="cursor"></div>
     <div class="nav-indicator serif" id="nav-num">01 / 04</div>
 
-    <!-- MAIN PAGE BACKGROUND (FLYING THINGS) -->
-    <div id="ornament-container" class="fixed inset-0 z-0 pointer-events-none"></div>
+    <!-- FLOATING STICKER LAYER -->
+    <div id="sticker-container" class="fixed inset-0 z-0 pointer-events-none"></div>
 
-    <!-- CHAPTER 1: HERO LANDING -->
+    <!-- CHAPTER 1: THE REVEAL -->
     <section class="chapter flex items-center justify-center" id="sec-1">
-        <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03]">
-            <h1 class="serif text-[28vw] text-white font-light">RADHIKA</h1>
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.02]">
+            <h1 class="serif text-[30vw] text-white font-light tracking-widest">RADHIKA</h1>
         </div>
 
         <div class="text-center z-10">
-            <p class="uppercase tracking-[0.8em] text-[10px] mb-8 text-rose-300/60 opacity-0" id="intro-tag">FOR MY ETERNAL LIGHT</p>
-            <h2 class="serif text-8xl md:text-[11vw] italic leading-[0.85] opacity-0 gold-text pb-4" id="intro-title">Happy <br> Birthday</h2>
-            <div class="h-[1px] w-0 bg-gold/40 mx-auto mt-12 mb-8" id="intro-line"></div>
+            <p class="uppercase tracking-[1em] text-[9px] mb-10 text-rose-300/40 opacity-0" id="intro-tag">A PRIVATE EXHIBITION</p>
+            <h2 class="serif text-8xl md:text-[12vw] italic leading-[0.8] opacity-0 gold-text pb-6" id="intro-title">Happy <br> Birthday</h2>
+            <div class="h-[1px] w-0 bg-gold/30 mx-auto mt-12 mb-10" id="intro-line"></div>
             <p class="cursive text-5xl text-rose-300 opacity-0" id="intro-name">Radhika</p>
         </div>
     </section>
 
-    <!-- CHAPTER 2: THE TRILOGY GALLERY (HORIZONTAL SCROLL) -->
+    <!-- CHAPTER 2: THE TRILOGY (HORIZONTAL SCROLL) -->
     <section class="chapter" id="sec-gallery">
         <div class="horizontal-wrapper">
             
-            <!-- Slide 1: The Beginning -->
+            <!-- PANEL 1: PIC 1 -->
             <div class="horiz-panel">
-                <div class="grid grid-cols-12 w-full gap-12 items-center">
+                <div class="grid grid-cols-12 w-full gap-16 items-center">
                     <div class="col-span-12 md:col-span-5 text-left">
-                        <span class="serif text-7xl italic text-gold/30">01</span>
-                        <h3 class="serif text-5xl mt-6 mb-8 text-white">The Spark</h3>
-                        <p class="text-xs uppercase tracking-[0.4em] leading-loose text-neutral-500">Every story has a beginning, but ours felt like it was written in the stars long before we met.</p>
+                        <span class="serif text-8xl italic text-gold/20">I.</span>
+                        <h3 class="serif text-5xl mt-8 mb-10 text-white font-light">The Beginning</h3>
+                        <p class="text-xs uppercase tracking-[0.5em] leading-loose text-neutral-500">Every star in the midnight sky witnessed the moment you changed my world forever.</p>
                     </div>
                     <div class="col-span-12 md:col-span-7 flex justify-end">
-                        <div class="w-[380px] h-[520px] photo-frame">
+                        <div class="w-[400px] h-[550px] photo-frame">
                             <img src="images/pic1.png" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 2: The Journey -->
+            <!-- PANEL 2: PIC 2 -->
             <div class="horiz-panel">
-                <div class="grid grid-cols-12 w-full gap-12 items-center">
+                <div class="grid grid-cols-12 w-full gap-16 items-center">
                     <div class="col-span-12 md:col-span-7">
-                        <div class="w-full h-[420px] photo-frame">
+                        <div class="w-full h-[450px] photo-frame">
                             <img src="images/pic2.png" class="w-full h-full object-cover">
                         </div>
                     </div>
-                    <div class="col-span-12 md:col-span-5 pl-12 text-left">
-                        <span class="serif text-7xl italic text-gold/30">02</span>
-                        <h3 class="serif text-5xl mt-6 mb-8 text-white">The Journey</h3>
-                        <p class="text-xs uppercase tracking-[0.4em] leading-loose text-neutral-500">From the quiet moments to the grand adventures, being by your side is my favorite place to be.</p>
+                    <div class="col-span-12 md:col-span-5 pl-16 text-left">
+                        <span class="serif text-8xl italic text-gold/20">II.</span>
+                        <h3 class="serif text-5xl mt-8 mb-10 text-white font-light">The Present</h3>
+                        <p class="text-xs uppercase tracking-[0.5em] leading-loose text-neutral-500">In this very moment, there is no place I'd rather be than here, celebrating the light you bring to life.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 3: The Forever -->
+            <!-- PANEL 3: PIC 3 -->
             <div class="horiz-panel">
-                <div class="grid grid-cols-12 w-full gap-12 items-center">
+                <div class="grid grid-cols-12 w-full gap-16 items-center">
                     <div class="col-span-12 md:col-span-5 text-left">
-                        <span class="serif text-7xl italic text-gold/30">03</span>
-                        <h3 class="serif text-5xl mt-6 mb-8 text-white">The Forever</h3>
-                        <p class="text-xs uppercase tracking-[0.4em] leading-loose text-neutral-500">The best chapters of my life are the ones I spend with you. I can't wait for all the ones to come.</p>
+                        <span class="serif text-8xl italic text-gold/20">III.</span>
+                        <h3 class="serif text-5xl mt-8 mb-10 text-white font-light">The Always</h3>
+                        <p class="text-xs uppercase tracking-[0.5em] leading-loose text-neutral-500">Our story isn't measured in years, but in the infinite love that grows with every beat of my heart.</p>
                     </div>
                     <div class="col-span-12 md:col-span-7 flex justify-end">
-                        <div class="w-[400px] h-[400px] photo-frame rounded-full overflow-hidden border-gold/40">
-                            <img src="images/pic3.jpg" class="w-full h-full object-cover">
+                        <div class="w-[450px] h-[450px] photo-frame rounded-full overflow-hidden border-gold/30">
+                            <img src="images/pic3.png" class="w-full h-full object-cover hover:scale-110 transition-transform duration-[2s]">
                         </div>
                     </div>
                 </div>
@@ -135,28 +131,28 @@
         </div>
     </section>
 
-    <!-- CHAPTER 3: INTERACTIVE SECRET -->
+    <!-- CHAPTER 3: THE SECRET VAULT -->
     <section class="chapter flex items-center justify-center bg-[#050505]" id="sec-vault">
         <div class="w-full text-center">
-            <h2 class="serif text-6xl italic mb-8 gold-text">A Final Note</h2>
-            <p class="text-[10px] uppercase tracking-[0.6em] text-neutral-600 mb-20">Guide the Rose to Reveal My Heart</p>
+            <h2 class="serif text-6xl italic mb-10 gold-text">A Final Reflection</h2>
+            <p class="text-[9px] uppercase tracking-[0.8em] text-neutral-600 mb-20">Drag the Rose to Reveal My Heart</p>
             
             <div class="flex flex-col items-center">
                 <div id="vault-target" class="w-32 h-32 border border-gold/10 rounded-full flex items-center justify-center mb-24 relative">
                     <div class="absolute inset-0 rounded-full animate-ping bg-gold/5"></div>
                     <div class="w-1 h-1 bg-gold rounded-full"></div>
                 </div>
-                <div id="vault-key" class="w-20 h-20 bg-neutral-900 rounded-full flex items-center justify-center cursor-grab active:cursor-grabbing border border-rose-500/30 shadow-[0_0_40px_rgba(234,200,200,0.1)]">
-                    <span class="text-2xl">🌹</span>
+                <div id="vault-key" class="w-20 h-20 bg-neutral-900 rounded-full flex items-center justify-center cursor-grab active:cursor-grabbing border border-rose-500/20 shadow-[0_0_50px_rgba(197,160,89,0.1)]">
+                    <span class="text-3xl">🌹</span>
                 </div>
             </div>
         </div>
 
         <div id="vault-message" class="fixed inset-0 bg-black z-[100] flex items-center justify-center opacity-0 pointer-events-none p-12 text-center">
-            <div class="max-w-2xl">
+            <div class="max-w-3xl">
                 <p class="cursive text-5xl text-rose-300 mb-12">I Love You, Radhika.</p>
-                <p class="serif text-4xl leading-relaxed italic gold-text">"You are the dream I never want to wake up from. Happy Birthday to the soul who makes my world beautiful."</p>
-                <button class="mt-20 text-gold uppercase tracking-[0.5em] text-[10px] border-b border-gold/20 pb-2 hover:border-gold transition-all" onclick="closeVault()">Close</button>
+                <p class="serif text-4xl leading-relaxed italic gold-text">"You are the moon that pulls my tide and the sun that starts my day. May this birthday be as radiant as you are."</p>
+                <button class="mt-20 text-gold uppercase tracking-[0.5em] text-[10px] border-b border-gold/20 pb-2 hover:border-gold transition-all" onclick="closeVault()">Return</button>
             </div>
         </div>
     </section>
@@ -164,8 +160,8 @@
     <!-- CHAPTER 4: FINALE -->
     <section class="chapter flex items-center justify-center" id="sec-end">
         <div class="text-center">
-            <h2 class="serif text-9xl italic gold-text">Forever.</h2>
-            <p class="text-[10px] mt-8 uppercase tracking-[0.6em] opacity-40">Until the stars fade away.</p>
+            <h2 class="serif text-[10vw] italic gold-text">Forever.</h2>
+            <p class="text-[9px] mt-10 uppercase tracking-[1em] opacity-30 italic">Designed for my beautiful Radhika</p>
         </div>
     </section>
 
@@ -175,41 +171,42 @@
         // 1. CURSOR
         const cursor = document.getElementById('cursor');
         window.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, { x: e.clientX - 15, y: e.clientY - 15, duration: 0.8, ease: "power3.out" });
+            gsap.to(cursor, { x: e.clientX - 12, y: e.clientY - 12, duration: 0.6, ease: "power3.out" });
         });
 
-        // 2. FLYING STICKER SYSTEM
-        const icons = ['✨', '🥂', '💖', '🎂', '🌙', '💍', '🌸', '🪄', '💎'];
-        function spawnOrnament() {
+        // 2. RAW STICKER SYSTEM (NO BOXES)
+        const emojiList = ['✨', '🥂', '💖', '🌙', '💍', '🌸', '💎', '🕯️', '🕊️'];
+        function spawnSticker() {
             const el = document.createElement('div');
-            el.className = 'ornament serif';
-            el.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            el.className = 'sticker serif';
+            el.innerHTML = emojiList[Math.floor(Math.random() * emojiList.length)];
             el.style.left = Math.random() * 100 + 'vw';
             el.style.top = '110vh';
-            el.style.fontSize = (Math.random() * 15 + 15) + 'px';
-            document.getElementById('ornament-container').appendChild(el);
+            el.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            el.style.opacity = Math.random() * 0.5 + 0.3;
+            document.getElementById('sticker-container').appendChild(el);
 
             gsap.to(el, {
                 y: '-120vh',
-                x: (Math.random() - 0.5) * 300,
+                x: (Math.random() - 0.5) * 400,
                 rotation: Math.random() * 720,
-                duration: 12 + Math.random() * 8,
+                duration: 15 + Math.random() * 10,
                 ease: "none",
                 onComplete: () => el.remove()
             });
         }
-        setInterval(spawnOrnament, 1200);
+        setInterval(spawnSticker, 1000);
 
         // 3. INTRO ANIMATIONS
         window.addEventListener('load', () => {
             const tl = gsap.timeline();
             tl.to("#intro-tag", { opacity: 1, y: 0, duration: 1.5 })
               .to("#intro-title", { opacity: 1, y: 0, duration: 2, ease: "power4.out" }, "-=1")
-              .to("#intro-line", { width: 160, duration: 2, ease: "expo.inOut" }, "-=1.5")
+              .to("#intro-line", { width: 180, duration: 2, ease: "expo.inOut" }, "-=1.5")
               .to("#intro-name", { opacity: 1, y: 0, duration: 1.5 }, "-=1");
         });
 
-        // 4. HORIZONTAL SCROLL GALLERY (3 PANELS)
+        // 4. TRIPLE PANEL HORIZONTAL SCROLL
         const wrapper = document.querySelector(".horizontal-wrapper");
         gsap.to(wrapper, {
             x: () => -(wrapper.scrollWidth - window.innerWidth),
@@ -228,13 +225,18 @@
         const key = document.getElementById('vault-key');
         const target = document.getElementById('vault-target');
         
-        key.addEventListener('mousedown', () => isDragging = true);
-        key.addEventListener('touchstart', () => isDragging = true);
+        const startDrag = () => isDragging = true;
+        const stopDrag = () => {
+            if (isDragging) gsap.to(key, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.4)" });
+            isDragging = false;
+        };
 
-        window.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
-        window.addEventListener('touchmove', (e) => handleMove(e.touches[0].clientX, e.touches[0].clientY));
+        key.addEventListener('mousedown', startDrag);
+        key.addEventListener('touchstart', startDrag);
+        window.addEventListener('mouseup', stopDrag);
+        window.addEventListener('touchend', stopDrag);
 
-        function handleMove(x, y) {
+        const handleMove = (x, y) => {
             if (!isDragging) return;
             gsap.to(key, { 
                 x: x - window.innerWidth/2, 
@@ -246,16 +248,14 @@
             const tRect = target.getBoundingClientRect();
             const dist = Math.hypot(kRect.x - tRect.x, kRect.y - tRect.y);
             
-            if (dist < 60) {
-                gsap.to("#vault-message", { opacity: 1, pointerEvents: "all", duration: 1 });
+            if (dist < 65) {
+                gsap.to("#vault-message", { opacity: 1, pointerEvents: "all", duration: 1, ease: "power4.inOut" });
                 isDragging = false;
             }
-        }
+        };
 
-        window.addEventListener('mouseup', () => {
-            if (isDragging) gsap.to(key, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.4)" });
-            isDragging = false;
-        });
+        window.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
+        window.addEventListener('touchmove', (e) => handleMove(e.touches[0].clientX, e.touches[0].clientY));
 
         function closeVault() { gsap.to("#vault-message", { opacity: 0, pointerEvents: "none", duration: 0.8 }); }
 
