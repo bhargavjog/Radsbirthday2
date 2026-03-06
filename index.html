@@ -3,189 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radhika | Infinite Love</title>
+    <title>Radhika | A Cinematic Birthday</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@200;300;400;600&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
-        :root { --soft-pink: #fff5f5; --rose-gold: #e7a3a3; --deep-rose: #88304e; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--soft-pink); color: #2d2d2d; overflow: hidden; cursor: none; }
+        :root { 
+            --bg: #fffafa; 
+            --accent: #d4a3a3; 
+            --text: #3d2b2b;
+            --rose: #ff8fa3;
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            overflow: hidden; /* Locked for preloader */
+        }
+
         .serif { font-family: 'Playfair Display', serif; }
         .cursive { font-family: 'Dancing Script', cursive; }
 
-        /* Custom Cursor */
-        #cursor { width: 20px; height: 20px; background: var(--rose-gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 999; mix-blend-mode: multiply; }
-
-        /* Luxury Mesh Background */
-        .bg-mesh {
-            position: fixed; inset: 0; z-index: -1;
-            background-image: 
-                radial-gradient(at 0% 0%, hsla(343,100%,92%,1) 0, transparent 50%), 
-                radial-gradient(at 100% 0%, hsla(330,100%,95%,1) 0, transparent 50%),
-                radial-gradient(at 100% 100%, hsla(343,100%,92%,1) 0, transparent 50%);
+        /* High-End Grain Overlay */
+        .noise::before {
+            content: "";
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.05; pointer-events: none; z-index: 999;
         }
 
-        /* Envelope Entrance */
-        #entrance { position: fixed; inset: 0; background: var(--soft-pink); z-index: 100; display: flex; align-items: center; justify-content: center; }
-        .envelope { width: 300px; height: 200px; background: #fff; position: relative; cursor: pointer; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .wax-seal { width: 50px; height: 50px; background: #b13c5c; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center; color: white; font-family: 'serif'; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        /* Organic Background Blobs */
+        .blob {
+            position: fixed; width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(255,192,203,0.4) 0%, rgba(255,255,255,0) 70%);
+            filter: blur(80px); z-index: -1; pointer-events: none;
+        }
 
-        /* Memory Cards */
-        .memory-card { perspective: 1000px; width: 250px; height: 350px; cursor: pointer; }
-        .card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s; transform-style: preserve-3d; }
-        .memory-card.flipped .card-inner { transform: rotateY(180deg); }
-        .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .card-back { background: white; transform: rotateY(180deg); display: flex; align-items: center; justify-content: center; padding: 20px; font-style: italic; color: var(--deep-rose); }
+        /* Custom Luxury Cursor */
+        #cursor-dot { width: 8px; height: 8px; background: var(--text); border-radius: 50%; position: fixed; pointer-events: none; z-index: 1000; }
+        #cursor-ring { width: 40px; height: 40px; border: 1px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 1000; transition: transform 0.1s; }
 
-        .glass-btn { background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.6); padding: 12px 30px; border-radius: 30px; transition: all 0.3s; }
-        .glass-btn:hover { background: rgba(255, 255, 255, 0.8); transform: translateY(-3px); }
+        /* The Reveal Wrapper */
+        .reveal-container { clip-path: inset(0 0 100% 0); }
+
+        /* Luxury Image Styling */
+        .img-reveal { overflow: hidden; border-radius: 2px; position: relative; }
+        .img-reveal img { transform: scale(1.2); transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .img-reveal:hover img { transform: scale(1); }
+
+        /* Magnetic Button */
+        .magnetic-wrap { display: inline-block; }
     </style>
 </head>
-<body>
+<body class="noise">
 
-    <div id="cursor"></div>
-    <div class="bg-mesh"></div>
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
 
-    <!-- 1. THE ENTRANCE (CLICK TO OPEN) -->
-    <div id="entrance">
-        <div class="text-center">
-            <p class="serif italic text-xl mb-8 text-rose-800">For Your Eyes Only</p>
-            <div class="envelope" onclick="openEnvelope()">
-                <div class="wax-seal">R</div>
-            </div>
-            <p class="mt-8 text-xs tracking-[0.3em] uppercase text-rose-400">Click to Open</p>
+    <!-- PRELOADER -->
+    <div id="loader" class="fixed inset-0 bg-white z-[100] flex flex-col items-center justify-center">
+        <div class="overflow-hidden mb-4">
+            <p id="loader-text" class="serif italic text-2xl translate-y-full font-light">The World Awaited Radhika...</p>
+        </div>
+        <div class="w-24 h-[1px] bg-neutral-200 relative">
+            <div id="loader-bar" class="absolute top-0 left-0 h-full bg-rose-300 w-0"></div>
         </div>
     </div>
 
-    <!-- 2. MAIN CONTENT (HIDDEN UNTIL OPENED) -->
-    <main id="main-content" class="opacity-0 overflow-y-auto h-screen">
+    <!-- BLOBS -->
+    <div class="blob" id="blob1"></div>
+    <div class="blob" id="blob2"></div>
+
+    <!-- MAIN SCROLL CONTENT -->
+    <div id="content" class="opacity-0">
         
-        <!-- HERO -->
-        <section class="min-h-screen flex flex-col items-center justify-center p-4">
-            <h1 class="serif text-8xl md:text-[150px] text-rose-500/20 absolute opacity-10 select-none">RADHIKA</h1>
-            <div class="text-center z-10">
-                <h2 class="serif text-6xl md:text-8xl italic mb-4">Happy Birthday</h2>
-                <p class="cursive text-4xl text-rose-500">To my beautiful Radhika</p>
-                <div class="mt-12 flex gap-4 justify-center">
-                    <div class="text-center"><span id="days" class="serif text-3xl">00</span><p class="text-[10px] uppercase">Days</p></div>
-                    <div class="text-center"><span id="hours" class="serif text-3xl">00</span><p class="text-[10px] uppercase">Hrs</p></div>
-                    <div class="text-center"><span id="minutes" class="serif text-3xl">00</span><p class="text-[10px] uppercase">Mins</p></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- INTERACTIVE REASONS -->
-        <section class="min-h-screen flex flex-col items-center justify-center p-4 bg-white/30">
-            <h3 class="serif text-4xl mb-12 italic">Why I Love You</h3>
-            <div id="reason-box" class="h-32 flex items-center justify-center text-center max-w-xl">
-                <p class="serif text-2xl text-rose-800 italic" id="reason-text">Click the button below...</p>
-            </div>
-            <button class="glass-btn serif mt-8 flex items-center gap-2" onclick="generateReason()">
-                Read a Reason ✨
-            </button>
-        </section>
-
-        <!-- INTERACTIVE MEMORY GALLERY -->
-        <section class="min-h-screen py-20 px-4">
-            <h3 class="serif text-4xl text-center mb-16 italic">Flip for a Memory</h3>
-            <div class="flex flex-wrap justify-center gap-10 max-w-6xl mx-auto">
-                
-                <!-- CARD 1 -->
-                <div class="memory-card" onclick="this.classList.toggle('flipped')">
-                    <div class="card-inner">
-                        <div class="card-front"><img src="images/pic1.jpg" class="w-full h-full object-cover"></div>
-                        <div class="card-back"><p>"The way you look when you're laughing is my favorite view in the world."</p></div>
-                    </div>
-                </div>
-
-                <!-- CARD 2 -->
-                <div class="memory-card" onclick="this.classList.toggle('flipped')">
-                    <div class="card-inner">
-                        <div class="card-front"><img src="images/pic2.jpg" class="w-full h-full object-cover"></div>
-                        <div class="card-back"><p>"Remember this day? Every second with you is a permanent memory."</p></div>
-                    </div>
-                </div>
-
-                <!-- CARD 3 -->
-                <div class="memory-card" onclick="this.classList.toggle('flipped')">
-                    <div class="card-inner">
-                        <div class="card-front"><img src="images/pic3.jpg" class="w-full h-full object-cover"></div>
-                        <div class="card-back"><p>"You are my greatest adventure and my favorite home."</p></div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- FINAL FOOTER -->
-        <section class="h-screen flex items-center justify-center">
+        <!-- SECTION 1: THE INVITATION -->
+        <section class="h-screen flex items-center justify-center px-6 relative">
             <div class="text-center">
-                <p class="serif text-4xl mb-8 italic">Ready for your real gift?</p>
-                <button class="glass-btn text-rose-500 font-bold" onclick="launchConfetti()">CLICK FOR SURPRISE 🎊</button>
+                <span class="block uppercase tracking-[0.5em] text-[10px] mb-8 opacity-0" id="hero-sub">Special Anniversary Edition</span>
+                <h1 class="serif text-[12vw] md:text-[8vw] leading-none mb-6 opacity-0" id="hero-title">
+                    Radhika<span class="text-rose-400">.</span>
+                </h1>
+                <p class="cursive text-3xl text-neutral-400 opacity-0" id="hero-date">Twenty Twenty Four</p>
+                <div class="mt-20 animate-bounce opacity-40">
+                    <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                </div>
             </div>
         </section>
-    </main>
+
+        <!-- SECTION 2: INTERACTIVE TAPESTRY -->
+        <section class="py-40 px-6 max-w-7xl mx-auto">
+            <div class="grid grid-cols-12 gap-6">
+                <div class="col-span-12 md:col-span-5 mb-20 md:mb-0">
+                    <h2 class="serif text-5xl italic leading-tight mb-10">A life lived <br> beautifully.</h2>
+                    <p class="text-neutral-500 leading-relaxed max-w-sm mb-12">
+                        Click through the fragments of our journey. Each piece is a memory I carry with me everywhere.
+                    </p>
+                    <div class="glass-card p-8 rounded-2xl bg-white/40 border border-white/60">
+                        <p class="text-xs uppercase tracking-widest mb-4">Time Elapsed</p>
+                        <div class="flex justify-between">
+                            <div><span id="d" class="text-3xl serif italic">00</span><p class="text-[9px] font-bold opacity-30">DAYS</p></div>
+                            <div><span id="h" class="text-3xl serif italic">00</span><p class="text-[9px] font-bold opacity-30">HRS</p></div>
+                            <div><span id="m" class="text-3xl serif italic">00</span><p class="text-[9px] font-bold opacity-30">MINS</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-span-12 md:col-span-7 grid grid-cols-2 gap-4">
+                    <div class="img-reveal aspect-[4/5] mt-20" onclick="celebrate()"><img src="images/pic1.jpg" class="w-full h-full object-cover"></div>
+                    <div class="img-reveal aspect-[3/4]" onclick="celebrate()"><img src="images/pic2.jpg" class="w-full h-full object-cover"></div>
+                    <div class="img-reveal aspect-[4/5] col-span-2 -mt-20 md:px-20" onclick="celebrate()"><img src="images/pic3.jpg" class="w-full h-full object-cover"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: THE WISH ALCHEMY (CLICK & HOLD) -->
+        <section class="h-screen flex flex-col items-center justify-center bg-white/20">
+            <div class="text-center p-12">
+                <h3 class="serif text-4xl mb-4 italic">Make a Wish</h3>
+                <p class="text-neutral-400 text-sm mb-12">Press and hold the circle to charge your year with magic.</p>
+                
+                <div id="wish-circle" class="w-32 h-32 border border-rose-200 rounded-full flex items-center justify-center cursor-pointer relative group transition-all">
+                    <div id="wish-progress" class="absolute inset-0 rounded-full border-4 border-rose-400 opacity-0 scale-50"></div>
+                    <span class="text-xs uppercase tracking-widest group-hover:text-rose-400 transition-colors">Hold</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: THE LETTER -->
+        <section class="min-h-screen py-40 flex items-center justify-center bg-stone-50">
+            <div class="max-w-2xl px-8 text-center">
+                <h4 class="cursive text-4xl text-rose-400 mb-12">My Promise</h4>
+                <p id="letter-text" class="serif text-2xl md:text-3xl leading-relaxed italic text-stone-700">
+                    "In every version of reality, in every timeline of existence, I would find my way to you. You aren't just a part of my life, Radhika; you are the rhythm of it."
+                </p>
+                <div class="mt-20 opacity-30 italic serif">Always, Always.</div>
+            </div>
+        </section>
+
+    </div>
 
     <script>
-        // 1. Cursor Follower
-        const cursor = document.getElementById('cursor');
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. CURSOR LOGIC
+        const dot = document.getElementById('cursor-dot');
+        const ring = document.getElementById('cursor-ring');
         window.addEventListener('mousemove', (e) => {
-            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.5, ease: "power3.out" });
+            gsap.to(dot, { x: e.clientX, y: e.clientY, duration: 0.1 });
+            gsap.to(ring, { x: e.clientX - 16, y: e.clientY - 16, duration: 0.3 });
         });
 
-        // 2. Envelope Opening Logic
-        function openEnvelope() {
-            const tl = gsap.timeline();
-            tl.to(".wax-seal", { scale: 0, opacity: 0, duration: 0.5 })
-              .to(".envelope", { y: -100, opacity: 0, duration: 0.8, ease: "power4.in" })
-              .to("#entrance", { opacity: 0, display: "none", duration: 1 })
-              .to("body", { overflow: "auto", cursor: "default", duration: 0 })
-              .to("#main-content", { opacity: 1, duration: 1 });
-            
-            launchConfetti();
-        }
+        // 2. LOADING SEQUENCE
+        const tl = gsap.timeline();
+        tl.to("#loader-text", { y: 0, duration: 1, ease: "power4.out" })
+          .to("#loader-bar", { width: "100%", duration: 2, ease: "power2.inOut" })
+          .to("#loader", { y: "-100%", duration: 1.2, ease: "expo.inOut" })
+          .to("body", { overflow: "auto" }, "-=0.5")
+          .to("#content", { opacity: 1, duration: 1 }, "-=0.5")
+          .from("#hero-title", { y: 100, opacity: 0, duration: 1.5, ease: "power4.out" }, "-=0.5")
+          .from("#hero-sub", { opacity: 0, duration: 1 }, "-=1")
+          .from("#hero-date", { opacity: 0, duration: 1 }, "-=1");
 
-        // 3. Reasons Generator
-        const reasons = [
-            "Your kindness towards everyone you meet.",
-            "The way you make me feel like I can achieve anything.",
-            "How your eyes sparkle when you're talking about something you love.",
-            "Your incredible strength and resilience.",
-            "The way you remember the smallest details about us.",
-            "Because you are my best friend and my soulmate.",
-            "The way you make 'home' feel like a person, not a place."
-        ];
+        // 3. BLOB MOVEMENT
+        window.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 50;
+            const y = (e.clientY / window.innerHeight) * 50;
+            gsap.to("#blob1", { x: x * 2, y: y * 2, duration: 2 });
+            gsap.to("#blob2", { x: -x * 2, y: -y * 2, duration: 2 });
+        });
 
-        function generateReason() {
-            const box = document.getElementById('reason-text');
-            gsap.to(box, { opacity: 0, y: 10, duration: 0.3, onComplete: () => {
-                box.innerText = reasons[Math.floor(Math.random() * reasons.length)];
-                gsap.to(box, { opacity: 1, y: 0, duration: 0.3 });
+        // 4. WISH ALCHEMY (HOLD LOGIC)
+        const wishCircle = document.getElementById('wish-circle');
+        const wishProgress = document.getElementById('wish-progress');
+        let wishInterval;
+
+        wishCircle.addEventListener('mousedown', startHold);
+        wishCircle.addEventListener('touchstart', startHold);
+        wishCircle.addEventListener('mouseup', endHold);
+        wishCircle.addEventListener('touchend', endHold);
+
+        function startHold() {
+            gsap.to(wishProgress, { opacity: 1, scale: 1, duration: 2, ease: "power1.in", onComplete: () => {
+                celebrate(true);
+                endHold();
             }});
         }
 
-        // 4. Confetti Trigger
-        function launchConfetti() {
+        function endHold() {
+            gsap.killTweensOf(wishProgress);
+            gsap.to(wishProgress, { opacity: 0, scale: 0.5, duration: 0.5 });
+        }
+
+        function celebrate(isWish = false) {
+            const colors = isWish ? ['#ff0000', '#ffd700', '#ff69b4'] : ['#d4a3a3', '#ff8fa3'];
             confetti({
-                particleCount: 150,
+                particleCount: isWish ? 300 : 100,
                 spread: 70,
                 origin: { y: 0.6 },
-                colors: ['#e7a3a3', '#88304e', '#ffffff']
+                colors: colors
             });
         }
 
-        // 5. Countdown (Set to her birthday)
+        // 5. COUNTDOWN
         const target = new Date("2024-05-20T00:00:00").getTime();
         setInterval(() => {
-            const now = new Date().getTime();
-            const d = target - now;
-            document.getElementById("days").innerText = Math.floor(d / 86400000).toString().padStart(2, '0');
-            document.getElementById("hours").innerText = Math.floor((d % 86400000) / 3600000).toString().padStart(2, '0');
-            document.getElementById("minutes").innerText = Math.floor((d % 3600000) / 60000).toString().padStart(2, '0');
+            const d = target - new Date().getTime();
+            document.getElementById("d").innerText = Math.floor(d / 86400000).toString().padStart(2, '0');
+            document.getElementById("h").innerText = Math.floor((d % 86400000) / 3600000).toString().padStart(2, '0');
+            document.getElementById("m").innerText = Math.floor((d % 3600000) / 60000).toString().padStart(2, '0');
         }, 1000);
+
+        // 6. SCROLL ANIMATIONS
+        gsap.utils.toArray('.img-reveal').forEach(img => {
+            gsap.from(img, {
+                scrollTrigger: { trigger: img, start: "top 80%" },
+                y: 100, opacity: 0, duration: 1.5, ease: "power4.out"
+            });
+        });
     </script>
 </body>
 </html>
