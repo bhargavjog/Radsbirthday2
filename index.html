@@ -3,122 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday! ❤️</title>
-    <!-- Tailwind CSS -->
+    <title>Happy Birthday Radhika! ❤️</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- GSAP for Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@300;400;600&display=swap');
-        
-        body {
-            background-color: #0a0a0a;
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-        }
-
-        .cursive {
-            font-family: 'Dancing Script', cursive;
-        }
-
-        /* Glassmorphism effect */
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Floating Heart Styling */
-        .heart {
-            position: fixed;
-            color: #ff4d6d;
-            pointer-events: none;
-            z-index: 50;
-        }
-
-        /* Gradient Text */
-        .text-gradient {
-            background: linear-gradient(to right, #ff4d6d, #ff8fa3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .cursive { font-family: 'Dancing Script', cursive; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .heart { position: fixed; color: #ff4d6d; pointer-events: none; z-index: 50; }
+        .text-gradient { background: linear-gradient(to right, #ff4d6d, #ff8fa3, #ff4d6d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .polaroid { background: white; padding: 10px 10px 40px 10px; transform: rotate(-2deg); transition: all 0.3s ease; }
+        .polaroid:nth-child(even) { transform: rotate(3deg); }
+        .polaroid:hover { transform: rotate(0deg) scale(1.05); z-index: 20; }
     </style>
 </head>
-<body class="bg-neutral-950">
+<body>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
-        <!-- Floating Hearts Container (JS will inject here) -->
+    <section class="relative min-h-screen flex flex-col items-center justify-center text-center px-4">
         <div id="heart-container" class="absolute inset-0 pointer-events-none"></div>
 
         <div class="z-10">
-            <h2 id="typewriter" class="text-4xl md:text-6xl font-bold mb-4 h-16 md:h-24"></h2>
-            <!-- CUSTOMIZE HERE: Change the name -->
-            <h1 class="cursive text-6xl md:text-8xl text-gradient opacity-0" id="hero-name">To My Beautiful [Name]</h1>
-            <p class="mt-6 text-neutral-400 text-lg md:text-xl max-w-2xl mx-auto opacity-0" id="hero-sub">
-                "Every day with you is a gift, but today we celebrate the best gift the world ever received."
+            <h2 id="typewriter" class="text-3xl md:text-5xl font-bold mb-4 text-pink-500/80 h-12"></h2>
+            <h1 class="cursive text-7xl md:text-9xl text-gradient opacity-0 translate-y-10" id="hero-name">Radhika</h1>
+            <p class="mt-8 text-neutral-400 text-lg italic max-w-xl mx-auto opacity-0" id="hero-sub">
+                "To the girl who makes my world brighter just by being in it. You deserve all the love today and every day."
             </p>
         </div>
 
         <div class="absolute bottom-10 animate-bounce opacity-0" id="scroll-hint">
-            <svg class="w-6 h-6 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            <p class="text-xs uppercase tracking-widest text-neutral-500 mb-2">Scroll for your surprise</p>
+            <svg class="w-6 h-6 mx-auto text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
         </div>
     </section>
 
     <!-- Countdown Section -->
-    <section class="py-20 px-4 bg-neutral-900/50">
-        <div class="max-w-4xl mx-auto glass p-8 rounded-3xl text-center shadow-2xl">
-            <h3 class="text-2xl font-semibold mb-8 text-neutral-300">Countdown to Your Special Day</h3>
+    <section class="py-20 px-4">
+        <div class="max-w-3xl mx-auto glass p-10 rounded-3xl text-center shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-right from-transparent via-pink-500 to-transparent"></div>
+            <h3 class="text-xl tracking-widest uppercase mb-8 text-neutral-400">The Big Celebration Starts In</h3>
             <div id="countdown" class="grid grid-cols-4 gap-4 md:gap-8">
-                <div class="flex flex-col"><span id="days" class="text-3xl md:text-5xl font-bold text-pink-500">00</span><span class="text-xs uppercase text-neutral-500 mt-2">Days</span></div>
-                <div class="flex flex-col"><span id="hours" class="text-3xl md:text-5xl font-bold text-pink-500">00</span><span class="text-xs uppercase text-neutral-500 mt-2">Hours</span></div>
-                <div class="flex flex-col"><span id="minutes" class="text-3xl md:text-5xl font-bold text-pink-500">00</span><span class="text-xs uppercase text-neutral-500 mt-2">Mins</span></div>
-                <div class="flex flex-col"><span id="seconds" class="text-3xl md:text-5xl font-bold text-pink-500">00</span><span class="text-xs uppercase text-neutral-500 mt-2">Secs</span></div>
+                <div class="flex flex-col"><span id="days" class="text-4xl md:text-6xl font-light text-white">00</span><span class="text-[10px] uppercase tracking-tighter text-pink-500 mt-2 font-bold">Days</span></div>
+                <div class="flex flex-col"><span id="hours" class="text-4xl md:text-6xl font-light text-white">00</span><span class="text-[10px] uppercase tracking-tighter text-pink-500 mt-2 font-bold">Hours</span></div>
+                <div class="flex flex-col"><span id="minutes" class="text-4xl md:text-6xl font-light text-white">00</span><span class="text-[10px] uppercase tracking-tighter text-pink-500 mt-2 font-bold">Mins</span></div>
+                <div class="flex flex-col"><span id="seconds" class="text-4xl md:text-6xl font-light text-white">00</span><span class="text-[10px] uppercase tracking-tighter text-pink-500 mt-2 font-bold">Secs</span></div>
             </div>
         </div>
     </section>
 
     <!-- Gallery Section -->
     <section class="py-20 px-4 max-w-6xl mx-auto">
-        <h2 class="cursive text-5xl text-center mb-12">Our Memories</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <!-- CUSTOMIZE HERE: Replace the 'src' with your actual image URLs -->
-            <div class="group relative overflow-hidden rounded-2xl aspect-square glass">
-                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80" class="object-cover w-full h-full transition duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
-            </div>
-            <div class="group relative overflow-hidden rounded-2xl aspect-square glass">
-                <img src="https://images.unsplash.com/photo-1522673607200-1648832cee98?auto=format&fit=crop&q=80" class="object-cover w-full h-full transition duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
-            </div>
-            <div class="group relative overflow-hidden rounded-2xl aspect-square glass">
-                <img src="https://images.unsplash.com/photo-1516589174184-c685266d4af4?auto=format&fit=crop&q=80" class="object-cover w-full h-full transition duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
-            </div>
+        <h2 class="cursive text-5xl text-center mb-16 text-gradient">Capturing Radhika</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 px-8">
+            <!-- PHOTO SLOTS: These look for the 'images' folder -->
+            <div class="polaroid shadow-xl"><img src="images/pic1.jpg" alt="Radhika" class="w-full h-64 object-cover"></div>
+            <div class="polaroid shadow-xl"><img src="images/pic2.jpg" alt="Radhika" class="w-full h-64 object-cover"></div>
+            <div class="polaroid shadow-xl"><img src="images/pic3.jpg" alt="Radhika" class="w-full h-64 object-cover"></div>
+            <div class="polaroid shadow-xl"><img src="images/pic4.jpg" alt="Radhika" class="w-full h-64 object-cover"></div>
+            <div class="polaroid shadow-xl"><img src="images/pic5.jpg" alt="Radhika" class="w-full h-64 object-cover"></div>
+            <div class="polaroid shadow-xl"><img src="images/pic6.jpg" alt="Radhika" class="w-full h-64 object-cover"></div>
         </div>
     </section>
 
-    <!-- Footer Message -->
-    <footer class="py-20 text-center px-4">
-        <p class="cursive text-3xl text-pink-400">Forever & Always ❤️</p>
+    <!-- Love Note -->
+    <footer class="py-32 text-center px-4 bg-gradient-to-t from-pink-900/10 to-transparent">
+        <div class="max-w-2xl mx-auto">
+            <p class="cursive text-4xl text-pink-400 mb-4">I love you, Radhika.</p>
+            <p class="text-neutral-500 text-sm">Forever & Always ❤️</p>
+        </div>
     </footer>
 
     <script>
-        // 1. Typewriter Effect
-        const text = "Happy Birthday...";
+        // 1. Typewriter
+        const text = "Happy Birthday,";
         let i = 0;
         function typeWriter() {
             if (i < text.length) {
                 document.getElementById("typewriter").innerHTML += text.charAt(i);
                 i++;
-                setTimeout(typeWriter, 150);
+                setTimeout(typeWriter, 120);
             } else {
-                // Once typing finishes, show the rest of the hero content
-                gsap.to("#hero-name", { opacity: 1, y: -20, duration: 1.5, ease: "power4.out" });
+                gsap.to("#hero-name", { opacity: 1, y: 0, duration: 1.5, ease: "back.out(1.7)" });
                 gsap.to("#hero-sub", { opacity: 1, duration: 2, delay: 0.5 });
                 gsap.to("#scroll-hint", { opacity: 1, delay: 1 });
             }
         }
 
-        // 2. Floating Hearts Animation (GSAP)
+        // 2. Floating Hearts
         function createHeart() {
             const container = document.getElementById('heart-container');
             const heart = document.createElement('div');
@@ -126,48 +98,13 @@
             heart.className = 'heart text-xl';
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.top = '105vh';
+            heart.style.opacity = Math.random();
             container.appendChild(heart);
 
             gsap.to(heart, {
                 y: '-110vh',
-                x: (Math.random() - 0.5) * 200,
+                x: (Math.random() - 0.5) * 300,
                 rotation: Math.random() * 360,
-                duration: 5 + Math.random() * 5,
+                duration: 6 + Math.random() * 4,
                 ease: "none",
-                opacity: 0,
                 onComplete: () => heart.remove()
-            });
-        }
-
-        // 3. Countdown Timer Logic
-        // CUSTOMIZE HERE: Set the target birthday date (Year, MonthIndex 0-11, Day)
-        const birthdayDate = new Date("2024-12-31T00:00:00").getTime(); 
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = birthdayDate - now;
-
-            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = d < 10 ? '0'+d : d;
-            document.getElementById("hours").innerText = h < 10 ? '0'+h : h;
-            document.getElementById("minutes").innerText = m < 10 ? '0'+m : m;
-            document.getElementById("seconds").innerText = s < 10 ? '0'+s : s;
-
-            if (distance < 0) {
-                document.getElementById("countdown").innerHTML = "<p class='text-4xl cursive text-pink-500 w-full col-span-4'>It's Your Day! 🎂</p>";
-            }
-        }
-
-        // Initializations
-        window.onload = () => {
-            typeWriter();
-            setInterval(createHeart, 400); // Create a heart every 400ms
-            setInterval(updateCountdown, 1000);
-        };
-    </script>
-</body>
-</html>
