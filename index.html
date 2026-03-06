@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radhika | Happy Birthday, Baby </title>
+    <title>Radhika | Midnight Celebration</title>
     
+    <!-- Premium Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@100;300;400&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -15,227 +16,263 @@
             --onyx: #0a0a0a; 
             --gold: #c5a059; 
             --rose: #8e6d6d;
-            --glass: rgba(255, 255, 255, 0.03);
         }
         
         body { background-color: var(--onyx); color: #f2f2f2; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
         .serif { font-family: 'Cormorant Garamond', serif; }
         .cursive { font-family: 'Dancing Script', cursive; }
 
-        /* Custom Gold Glow Cursor */
-        .cursor-follower { width: 30px; height: 30px; border: 1px solid var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 1000; box-shadow: 0 0 15px rgba(197, 160, 89, 0.2); }
-
-        /* Smooth Grain Overlay for Texture */
-        .noise::before {
-            content: ""; position: fixed; inset: 0; width: 100%; height: 100%;
-            background: url('https://grainy-gradients.vercel.app/noise.svg');
-            opacity: 0.15; pointer-events: none; z-index: 999; contrast: 150%;
+        /* Floating "Glass" Ornaments */
+        .ornament {
+            position: fixed; pointer-events: none; user-select: none; z-index: 1;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px; border-radius: 14px;
         }
 
-        .chapter { height: 100vh; width: 100vw; position: relative; display: flex; align-items: center; overflow: hidden; }
-        
-        /* Horizontal Scroll Styling */
-        .horizontal-container { display: flex; width: 400vw; height: 100vh; background: var(--onyx); }
-        .horiz-panel { width: 100vw; height: 100%; display: flex; align-items: center; justify-content: center; padding: 0 10vw; border-right: 1px solid rgba(255,255,255,0.05); }
-
-        /* Image Masking & High-End Borders */
-        .image-frame { 
-            position: relative; overflow: hidden; border: 1px solid rgba(197, 160, 89, 0.3); padding: 10px;
-            background: linear-gradient(45deg, rgba(255,255,255,0.02), rgba(255,255,255,0.05));
-        }
-        .image-frame img { filter: contrast(1.1) brightness(0.9); transition: filter 0.5s ease; }
-        .image-frame:hover img { filter: contrast(1) brightness(1); }
-
-        /* Nav Counter */
-        .nav-count { position: fixed; left: 40px; bottom: 40px; font-size: 10px; letter-spacing: 0.8em; z-index: 50; color: var(--gold); }
-        
-        /* Gold Gradient Text */
+        /* Luxury Gold Title Styling */
         .gold-text {
-            background: linear-gradient(to right, #c5a059, #fdfcf0, #c5a059);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background: linear-gradient(to bottom, #fdfcf0 0%, #c5a059 50%, #856933 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
+        /* Section Layouts */
+        .chapter { height: 100vh; width: 100vw; position: relative; overflow: hidden; }
+        .horizontal-wrapper { display: flex; width: 300vw; height: 100vh; will-change: transform; }
+        .horiz-panel { width: 100vw; height: 100%; display: flex; align-items: center; justify-content: center; padding: 0 8vw; flex-shrink: 0; }
+
+        /* Photo Frames */
+        .photo-frame {
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 12px; background: rgba(255,255,255,0.01);
+            box-shadow: 0 30px 60px -12px rgba(0,0,0,0.5);
+        }
+
+        /* Custom Cursor */
+        #cursor { width: 30px; height: 30px; border: 1px solid var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 1000; mix-blend-mode: difference; }
+
+        /* Navigation Numbering */
+        .nav-indicator { position: fixed; left: 40px; bottom: 40px; font-size: 10px; letter-spacing: 0.8em; z-index: 50; color: var(--gold); opacity: 0.5; }
     </style>
 </head>
-<body class="noise">
+<body class="bg-[#0a0a0a]">
 
-    <div class="cursor-follower" id="cursor"></div>
-    <div class="nav-count serif" id="chapter-nav">01 / 04</div>
+    <div id="cursor"></div>
+    <div class="nav-indicator serif" id="nav-num">01 / 04</div>
 
-    <!-- CHAPTER 1: THE MONOGRAM (DARK REVEAL) -->
-    <section class="chapter" id="sec-1">
-        <div class="absolute inset-0 flex items-center justify-center">
-            <h1 class="serif text-[20vw] text-white opacity-[0.02] select-none font-light tracking-widest">R</h1>
+    <!-- MAIN PAGE BACKGROUND (FLYING THINGS) -->
+    <div id="ornament-container" class="fixed inset-0 z-0 pointer-events-none"></div>
+
+    <!-- CHAPTER 1: HERO LANDING -->
+    <section class="chapter flex items-center justify-center" id="sec-1">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03]">
+            <h1 class="serif text-[28vw] text-white font-light">RADHIKA</h1>
         </div>
-        <div class="w-full text-center z-10">
-            <p class="uppercase tracking-[0.8em] text-[10px] mb-12 text-rose-300/60 opacity-0" id="intro-tag">MY BIRHTDAY BABYGIRL</p>
-            <h2 class="serif text-7xl md:text-9xl italic font-light opacity-0 gold-text" id="intro-title">Happy Birthday, <br>Radhika</h2>
-            <div class="h-[1px] w-0 bg-gold/30 mx-auto mt-12" id="intro-line"></div>
+
+        <div class="text-center z-10">
+            <p class="uppercase tracking-[0.8em] text-[10px] mb-8 text-rose-300/60 opacity-0" id="intro-tag">FOR MY ETERNAL LIGHT</p>
+            <h2 class="serif text-8xl md:text-[11vw] italic leading-[0.85] opacity-0 gold-text pb-4" id="intro-title">Happy <br> Birthday</h2>
+            <div class="h-[1px] w-0 bg-gold/40 mx-auto mt-12 mb-8" id="intro-line"></div>
+            <p class="cursive text-5xl text-rose-300 opacity-0" id="intro-name">Radhika</p>
         </div>
     </section>
 
-    <!-- CHAPTER 2: THE TIMELINE (HORIZONTAL DARK) -->
-    <section class="chapter" id="sec-2">
-        <div class="horizontal-container">
-            <!-- Panel 1: The Origin -->
+    <!-- CHAPTER 2: THE TRILOGY GALLERY (HORIZONTAL SCROLL) -->
+    <section class="chapter" id="sec-gallery">
+        <div class="horizontal-wrapper">
+            
+            <!-- Slide 1: The Beginning -->
             <div class="horiz-panel">
-                <div class="grid grid-cols-12 w-full gap-8 items-center">
-                    <div class="col-span-12 md:col-span-5">
-                        <span class="serif text-7xl italic text-rose-400/50">2021</span>
-                        <h3 class="serif text-5xl mt-6 mb-8 gold-text">The First Glimmer</h3>
-                        <p class="text-xs uppercase tracking-[0.3em] leading-loose text-neutral-400">A chapter written in the stars. The night we first realized that 'us' was a possibility.</p>
+                <div class="grid grid-cols-12 w-full gap-12 items-center">
+                    <div class="col-span-12 md:col-span-5 text-left">
+                        <span class="serif text-7xl italic text-gold/30">01</span>
+                        <h3 class="serif text-5xl mt-6 mb-8 text-white">The Spark</h3>
+                        <p class="text-xs uppercase tracking-[0.4em] leading-loose text-neutral-500">Every story has a beginning, but ours felt like it was written in the stars long before we met.</p>
                     </div>
                     <div class="col-span-12 md:col-span-7 flex justify-end">
-                        <div class="w-80 h-[450px] image-frame">
-                            <img src="images/pic1.png" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                        <div class="w-[380px] h-[520px] photo-frame">
+                            <img src="images/pic1.png" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000">
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Panel 2: The Depth -->
+
+            <!-- Slide 2: The Journey -->
             <div class="horiz-panel">
-                <div class="grid grid-cols-12 w-full gap-8 items-center">
+                <div class="grid grid-cols-12 w-full gap-12 items-center">
                     <div class="col-span-12 md:col-span-7">
-                        <div class="w-full h-[400px] image-frame">
+                        <div class="w-full h-[420px] photo-frame">
                             <img src="images/pic2.png" class="w-full h-full object-cover">
                         </div>
                     </div>
-                    <div class="col-span-12 md:col-span-5 md:pl-20">
-                        <span class="serif text-7xl italic text-rose-400/50">2023</span>
-                        <h3 class="serif text-5xl mt-6 mb-8 gold-text">Deep Water</h3>
-                        <p class="text-xs uppercase tracking-[0.3em] leading-loose text-neutral-400">The year we built a home out of memories. You became my anchor and my sails.</p>
+                    <div class="col-span-12 md:col-span-5 pl-12 text-left">
+                        <span class="serif text-7xl italic text-gold/30">02</span>
+                        <h3 class="serif text-5xl mt-6 mb-8 text-white">The Journey</h3>
+                        <p class="text-xs uppercase tracking-[0.4em] leading-loose text-neutral-500">From the quiet moments to the grand adventures, being by your side is my favorite place to be.</p>
                     </div>
                 </div>
             </div>
-            <!-- Panel 3: The Promise -->
+
+            <!-- Slide 3: The Forever -->
             <div class="horiz-panel">
-                <div class="text-center w-full">
-                    <h2 class="serif text-8xl italic gold-text mb-8">Unwritten <br> Futures</h2>
-                    <p class="cursive text-4xl text-rose-300 opacity-60">To every dream we haven't shared yet.</p>
+                <div class="grid grid-cols-12 w-full gap-12 items-center">
+                    <div class="col-span-12 md:col-span-5 text-left">
+                        <span class="serif text-7xl italic text-gold/30">03</span>
+                        <h3 class="serif text-5xl mt-6 mb-8 text-white">The Forever</h3>
+                        <p class="text-xs uppercase tracking-[0.4em] leading-loose text-neutral-500">The best chapters of my life are the ones I spend with you. I can't wait for all the ones to come.</p>
+                    </div>
+                    <div class="col-span-12 md:col-span-7 flex justify-end">
+                        <div class="w-[400px] h-[400px] photo-frame rounded-full overflow-hidden border-gold/40">
+                            <img src="images/pic3.jpg" class="w-full h-full object-cover">
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
     </section>
 
-    <!-- CHAPTER 3: THE VAULT (DARK INTERACTIVE) -->
-    <section class="chapter bg-[#050505]" id="sec-3">
+    <!-- CHAPTER 3: INTERACTIVE SECRET -->
+    <section class="chapter flex items-center justify-center bg-[#050505]" id="sec-vault">
         <div class="w-full text-center">
-            <h2 class="serif text-6xl italic mb-8 gold-text">The Inner Sanctuary</h2>
-            <p class="text-[10px] uppercase tracking-[0.6em] text-neutral-600 mb-16">Guide the Rose to Unlock My Heart</p>
+            <h2 class="serif text-6xl italic mb-8 gold-text">A Final Note</h2>
+            <p class="text-[10px] uppercase tracking-[0.6em] text-neutral-600 mb-20">Guide the Rose to Reveal My Heart</p>
             
             <div class="flex flex-col items-center">
-                <!-- Lock Target -->
-                <div id="vault-target" class="w-32 h-32 border border-gold/20 rounded-full flex items-center justify-center mb-20 relative">
+                <div id="vault-target" class="w-32 h-32 border border-gold/10 rounded-full flex items-center justify-center mb-24 relative">
                     <div class="absolute inset-0 rounded-full animate-ping bg-gold/5"></div>
                     <div class="w-1 h-1 bg-gold rounded-full"></div>
                 </div>
-                <!-- Draggable Key -->
-                <div id="vault-key" class="w-20 h-20 bg-gradient-to-br from-rose-900 to-black rounded-full flex items-center justify-center cursor-grab active:cursor-grabbing shadow-[0_0_30px_rgba(142,109,109,0.3)] border border-rose-500/30">
+                <div id="vault-key" class="w-20 h-20 bg-neutral-900 rounded-full flex items-center justify-center cursor-grab active:cursor-grabbing border border-rose-500/30 shadow-[0_0_40px_rgba(234,200,200,0.1)]">
                     <span class="text-2xl">🌹</span>
                 </div>
             </div>
         </div>
 
-        <!-- Hidden Message Overlay -->
-        <div id="vault-message" class="fixed inset-0 bg-[#0a0a0a] text-white z-[100] flex items-center justify-center opacity-0 pointer-events-none p-10">
-            <div class="max-w-2xl text-center">
-                <p class="cursive text-5xl text-rose-400 mb-12">My Promise to Radhika</p>
-                <p class="serif text-4xl leading-relaxed italic gold-text">"You are the silence in the noise, the light in the dark, and the love in my life. Happy Birthday, my beautiful soul."</p>
-                <button class="mt-20 text-gold uppercase tracking-[0.4em] text-[10px] border-b border-gold/30 pb-2 hover:border-gold transition-all" onclick="closeVault()">Return to the Night</button>
+        <div id="vault-message" class="fixed inset-0 bg-black z-[100] flex items-center justify-center opacity-0 pointer-events-none p-12 text-center">
+            <div class="max-w-2xl">
+                <p class="cursive text-5xl text-rose-300 mb-12">I Love You, Radhika.</p>
+                <p class="serif text-4xl leading-relaxed italic gold-text">"You are the dream I never want to wake up from. Happy Birthday to the soul who makes my world beautiful."</p>
+                <button class="mt-20 text-gold uppercase tracking-[0.5em] text-[10px] border-b border-gold/20 pb-2 hover:border-gold transition-all" onclick="closeVault()">Close</button>
             </div>
         </div>
     </section>
 
-    <!-- CHAPTER 4: THE FINALE -->
-    <section class="chapter" id="sec-4">
-        <div class="absolute bottom-20 right-20 text-right">
-            <p class="text-[10px] mb-4 uppercase tracking-[0.6em] opacity-40">Forever Radhika</p>
-            <h2 class="serif text-7xl italic gold-text">Until the <br> Stars Fade.</h2>
+    <!-- CHAPTER 4: FINALE -->
+    <section class="chapter flex items-center justify-center" id="sec-end">
+        <div class="text-center">
+            <h2 class="serif text-9xl italic gold-text">Forever.</h2>
+            <p class="text-[10px] mt-8 uppercase tracking-[0.6em] opacity-40">Until the stars fade away.</p>
         </div>
     </section>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // 1. LUXE CURSOR
+        // 1. CURSOR
         const cursor = document.getElementById('cursor');
         window.addEventListener('mousemove', (e) => {
             gsap.to(cursor, { x: e.clientX - 15, y: e.clientY - 15, duration: 0.8, ease: "power3.out" });
         });
 
-        // 2. REVEAL SEQUENCE
+        // 2. FLYING STICKER SYSTEM
+        const icons = ['✨', '🥂', '💖', '🎂', '🌙', '💍', '🌸', '🪄', '💎'];
+        function spawnOrnament() {
+            const el = document.createElement('div');
+            el.className = 'ornament serif';
+            el.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.top = '110vh';
+            el.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            document.getElementById('ornament-container').appendChild(el);
+
+            gsap.to(el, {
+                y: '-120vh',
+                x: (Math.random() - 0.5) * 300,
+                rotation: Math.random() * 720,
+                duration: 12 + Math.random() * 8,
+                ease: "none",
+                onComplete: () => el.remove()
+            });
+        }
+        setInterval(spawnOrnament, 1200);
+
+        // 3. INTRO ANIMATIONS
         window.addEventListener('load', () => {
             const tl = gsap.timeline();
             tl.to("#intro-tag", { opacity: 1, y: 0, duration: 1.5 })
-              .to("#intro-title", { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" }, "-=1")
-              .to("#intro-line", { width: 120, duration: 2, ease: "expo.inOut" }, "-=1");
+              .to("#intro-title", { opacity: 1, y: 0, duration: 2, ease: "power4.out" }, "-=1")
+              .to("#intro-line", { width: 160, duration: 2, ease: "expo.inOut" }, "-=1.5")
+              .to("#intro-name", { opacity: 1, y: 0, duration: 1.5 }, "-=1");
         });
 
-        // 3. HORIZONTAL SCROLL
-        const panels = gsap.utils.toArray(".horiz-panel");
-        gsap.to(panels, {
-            xPercent: -100 * (panels.length - 1),
+        // 4. HORIZONTAL SCROLL GALLERY (3 PANELS)
+        const wrapper = document.querySelector(".horizontal-wrapper");
+        gsap.to(wrapper, {
+            x: () => -(wrapper.scrollWidth - window.innerWidth),
             ease: "none",
             scrollTrigger: {
-                trigger: "#sec-2",
+                trigger: "#sec-gallery",
                 pin: true,
                 scrub: 1.5,
-                end: () => "+=" + document.querySelector(".horizontal-container").offsetWidth
+                end: () => "+=" + wrapper.scrollWidth,
+                invalidateOnRefresh: true
             }
         });
 
-        // 4. THE VAULT DRAG LOGIC
+        // 5. VAULT DRAG LOGIC
         let isDragging = false;
         const key = document.getElementById('vault-key');
         const target = document.getElementById('vault-target');
         
         key.addEventListener('mousedown', () => isDragging = true);
-        window.addEventListener('mousemove', (e) => {
+        key.addEventListener('touchstart', () => isDragging = true);
+
+        window.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
+        window.addEventListener('touchmove', (e) => handleMove(e.touches[0].clientX, e.touches[0].clientY));
+
+        function handleMove(x, y) {
             if (!isDragging) return;
             gsap.to(key, { 
-                x: e.clientX - window.innerWidth/2, 
-                y: e.clientY - (window.innerHeight/2 + 100), 
-                duration: 0.2 
+                x: x - window.innerWidth/2, 
+                y: y - (window.innerHeight/2 + 100), 
+                duration: 0.1 
             });
             
-            // Detection
-            const rect1 = key.getBoundingClientRect();
-            const rect2 = target.getBoundingClientRect();
-            const distance = Math.hypot(rect1.x - rect2.x, rect1.y - rect2.y);
+            const kRect = key.getBoundingClientRect();
+            const tRect = target.getBoundingClientRect();
+            const dist = Math.hypot(kRect.x - tRect.x, kRect.y - tRect.y);
             
-            if (distance < 50) {
-                openVault();
+            if (dist < 60) {
+                gsap.to("#vault-message", { opacity: 1, pointerEvents: "all", duration: 1 });
                 isDragging = false;
             }
-        });
+        }
+
         window.addEventListener('mouseup', () => {
             if (isDragging) gsap.to(key, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.4)" });
             isDragging = false;
         });
 
-        function openVault() {
-            gsap.to("#vault-message", { opacity: 1, pointerEvents: "all", duration: 1.2, ease: "power4.inOut" });
-        }
-        function closeVault() {
-            gsap.to("#vault-message", { opacity: 0, pointerEvents: "none", duration: 0.8 });
-            gsap.to(key, { x: 0, y: 0, duration: 0.5 });
-        }
+        function closeVault() { gsap.to("#vault-message", { opacity: 0, pointerEvents: "none", duration: 0.8 }); }
 
-        // 5. NAV NUMBER UPDATER
+        // 6. NAV UPDATER
         ScrollTrigger.create({
             trigger: "body",
             start: "top top",
             end: "bottom bottom",
             onUpdate: (self) => {
-                const prog = self.progress;
                 let ch = "01";
-                if(prog > 0.25) ch = "02";
-                if(prog > 0.5) ch = "03";
-                if(prog > 0.75) ch = "04";
-                document.getElementById('chapter-nav').innerText = `${ch} / 04`;
+                const p = self.progress;
+                if(p > 0.25) ch = "02";
+                if(p > 0.6) ch = "03";
+                if(p > 0.85) ch = "04";
+                document.getElementById('nav-num').innerText = `${ch} / 04`;
             }
         });
     </script>
 </body>
 </html>
-
-
