@@ -3,108 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Radhika! ❤️</title>
+    <title>Radhika | A Birthday Celebration</title>
+    
+    <!-- High-End Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@300;400;600&display=swap');
-        body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        :root {
+            --soft-pink: #fff5f5;
+            --rose-gold: #e7a3a3;
+            --deep-rose: #88304e;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--soft-pink);
+            color: #2d2d2d;
+            overflow-x: hidden;
+        }
+
+        .serif { font-family: 'Playfair Display', serif; }
         .cursive { font-family: 'Dancing Script', cursive; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .heart { position: fixed; color: #ff4d6d; pointer-events: none; z-index: 50; }
-        .text-gradient { background: linear-gradient(to right, #ff4d6d, #ff8fa3, #ff4d6d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .polaroid { background: white; padding: 10px 10px 40px 10px; transform: rotate(-2deg); transition: all 0.3s ease; }
-        .polaroid:nth-child(even) { transform: rotate(3deg); }
-        .polaroid:hover { transform: rotate(0deg) scale(1.05); z-index: 20; }
+
+        /* Upscale Mesh Background */
+        .bg-mesh {
+            background-color: #fff5f5;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(343,100%,92%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(330,100%,95%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 100%, hsla(343,100%,92%,1) 0, transparent 50%), 
+                radial-gradient(at 0% 100%, hsla(330,100%,95%,1) 0, transparent 50%);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px 0 rgba(136, 48, 78, 0.05);
+        }
+
+        .section { height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
+
+        /* Custom Floating Animation */
+        .float { animation: floating 6s ease-in-out infinite; }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rose-gold); transition: all 0.3s; }
+        .nav-dot.active { width: 24px; border-radius: 10px; background: var(--deep-rose); }
     </style>
 </head>
-<body>
+<body class="bg-mesh">
 
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex flex-col items-center justify-center text-center px-4">
-        <div id="heart-container" class="absolute inset-0 pointer-events-none"></div>
+    <!-- Minimalist Navigation -->
+    <div class="fixed right-8 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-4">
+        <div class="nav-dot active" data-sec="home"></div>
+        <div class="nav-dot" data-sec="countdown"></div>
+        <div class="nav-dot" data-sec="gallery"></div>
+        <div class="nav-dot" data-sec="letter"></div>
+    </div>
 
-        <div class="z-10">
-            <h2 id="typewriter" class="text-3xl md:text-5xl font-bold mb-4 text-pink-500/80 h-12"></h2>
-            <h1 class="cursive text-7xl md:text-9xl text-gradient opacity-0 translate-y-10" id="hero-name">Radhika</h1>
-            <p class="mt-8 text-neutral-400 text-lg italic max-w-xl mx-auto opacity-0" id="hero-sub">
-                "To the girl who makes my world brighter just by being in it. You deserve all the love today and every day."
-            </p>
-        </div>
+    <!-- Floating Hearts Container -->
+    <div id="heart-container" class="fixed inset-0 pointer-events-none z-0 opacity-40"></div>
 
-        <div class="absolute bottom-10 animate-bounce opacity-0" id="scroll-hint">
-            <p class="text-xs uppercase tracking-widest text-neutral-500 mb-2">Scroll for your surprise</p>
-            <svg class="w-6 h-6 mx-auto text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+    <!-- PAGE 1: HERO -->
+    <section id="home" class="section px-4">
+        <div class="text-center z-10">
+            <p class="uppercase tracking-[0.3em] text-xs mb-6 text-rose-700/60 font-medium">Est. 199X • For Radhika</p>
+            <h1 class="serif text-7xl md:text-[120px] leading-tight mb-8 opacity-0 translate-y-10" id="hero-title">
+                Happy <br> <span class="italic text-rose-500">Birthday</span>
+            </h1>
+            <div class="h-[1px] w-24 bg-rose-300 mx-auto mb-8 opacity-0" id="hero-line"></div>
+            <p class="cursive text-4xl text-rose-400 opacity-0" id="hero-name">Radhika</p>
         </div>
     </section>
 
-    <!-- Countdown Section -->
-    <section class="py-20 px-4">
-        <div class="max-w-3xl mx-auto glass p-10 rounded-3xl text-center shadow-2xl relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-right from-transparent via-pink-500 to-transparent"></div>
-            <h3 class="text-xl tracking-widest uppercase mb-8 text-neutral-400">The Big Celebration Starts In</h3>
-            <div id="countdown" class="grid grid-cols-4 gap-4 md:gap-8">
-                <div class="flex flex-col"><span id="days" class="text-4xl md:text-6xl font-light text-white">00</span><span class="text-[10px] uppercase tracking-tighter text-pink-500 mt-2 font-bold">Days</span></div>
-                <div class="flex flex-col"><span id="hours" class="text-4xl md:text-6xl font-light text-white">00</span><span class="text-[10px] uppercase tracking-tighter text-pink-500 mt-2 font-bold">Hours</span></div>
-                <div class="flex flex-col"><span id="minutes" class="text-4xl md:text-6xl font-light text-white">00</span><span class="text-[10px] uppercase tracking-tighter text-pink-500 mt-2 font-bold">Mins</span></div>
-                <div class="flex flex-col"><span id="seconds" class="text-4xl md:text-6xl font-light text-white">00</span><span class="text-[10px] uppercase tracking-tighter text-pink-500 mt-2 font-bold">Secs</span></div>
+    <!-- PAGE 2: COUNTDOWN -->
+    <section id="countdown" class="section px-4">
+        <div class="glass-card p-12 md:p-20 rounded-[40px] max-w-4xl w-full text-center">
+            <h2 class="serif text-4xl md:text-5xl mb-12 italic">The celebration begins in...</h2>
+            <div id="timer" class="flex justify-between items-center max-w-2xl mx-auto">
+                <div class="flex flex-col"><span id="days" class="serif text-5xl md:text-7xl font-light">00</span><span class="text-[10px] uppercase tracking-widest mt-4">Days</span></div>
+                <div class="text-rose-300 text-4xl font-light">:</div>
+                <div class="flex flex-col"><span id="hours" class="serif text-5xl md:text-7xl font-light">00</span><span class="text-[10px] uppercase tracking-widest mt-4">Hours</span></div>
+                <div class="text-rose-300 text-4xl font-light">:</div>
+                <div class="flex flex-col"><span id="minutes" class="serif text-5xl md:text-7xl font-light">00</span><span class="text-[10px] uppercase tracking-widest mt-4">Mins</span></div>
+                <div class="text-rose-300 text-4xl font-light">:</div>
+                <div class="flex flex-col"><span id="seconds" class="serif text-5xl md:text-7xl font-light">00</span><span class="text-[10px] uppercase tracking-widest mt-4">Secs</span></div>
             </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section class="py-20 px-4 max-w-6xl mx-auto">
-        <h2 class="cursive text-5xl text-center mb-16 text-gradient">Capturing Radhika</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 px-8">
-            <!-- PHOTO SLOTS: These look for the 'images' folder -->
-            <div class="polaroid shadow-xl"><img src="images/pic1.jpg" alt="Radhika" class="w-full h-64 object-cover"></div>
-            <div class="polaroid shadow-xl"><img src="images/pic2.jpg" alt="Radhika" class="w-full h-64 object-cover"></div>
-            <div class="polaroid shadow-xl"><img src="images/pic3.jpg" alt="Radhika" class="w-full h-64 object-cover"></div>
-            <div class="polaroid shadow-xl"><img src="images/pic4.jpg" alt="Radhika" class="w-full h-64 object-cover"></div>
-            <div class="polaroid shadow-xl"><img src="images/pic5.jpg" alt="Radhika" class="w-full h-64 object-cover"></div>
-            <div class="polaroid shadow-xl"><img src="images/pic6.jpg" alt="Radhika" class="w-full h-64 object-cover"></div>
+    <!-- PAGE 3: GALLERY -->
+    <section id="gallery" class="section h-auto py-32 px-4">
+        <div class="max-w-6xl mx-auto w-full">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 px-4">
+                <h2 class="serif text-5xl md:text-6xl italic">Captured <br> Moments</h2>
+                <p class="text-rose-700/50 max-w-xs text-sm leading-relaxed mt-4 md:mt-0">A visual diary of my favorite person in the world.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- PHOTO SLOT 1 -->
+                <div class="aspect-[3/4] overflow-hidden rounded-2xl glass-card p-3 float" style="animation-delay: 0s;">
+                    <img src="images/pic1.jpg" class="w-full h-full object-cover rounded-xl" alt="Radhika">
+                </div>
+                <!-- PHOTO SLOT 2 -->
+                <div class="aspect-[3/4] mt-12 overflow-hidden rounded-2xl glass-card p-3 float" style="animation-delay: 1s;">
+                    <img src="images/pic2.jpg" class="w-full h-full object-cover rounded-xl" alt="Radhika">
+                </div>
+                <!-- PHOTO SLOT 3 -->
+                <div class="aspect-[3/4] overflow-hidden rounded-2xl glass-card p-3 float" style="animation-delay: 2s;">
+                    <img src="images/pic3.jpg" class="w-full h-full object-cover rounded-xl" alt="Radhika">
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Love Note -->
-    <footer class="py-32 text-center px-4 bg-gradient-to-t from-pink-900/10 to-transparent">
-        <div class="max-w-2xl mx-auto">
-            <p class="cursive text-4xl text-pink-400 mb-4">I love you, Radhika.</p>
-            <p class="text-neutral-500 text-sm">Forever & Always ❤️</p>
+    <!-- PAGE 4: LOVE LETTER -->
+    <section id="letter" class="section px-4">
+        <div class="max-w-2xl text-center">
+            <div class="cursive text-5xl text-rose-500 mb-12">Dear Radhika,</div>
+            <p class="serif text-xl md:text-2xl leading-relaxed text-rose-900/80 italic">
+                "Some people bring out the best in you, but you bring out the best in life. May your year be as radiant and elegant as you are."
+            </p>
+            <div class="mt-16">
+                <p class="uppercase tracking-widest text-[10px] text-rose-400 font-bold mb-2">Yours Forever</p>
+                <div class="h-[1px] w-12 bg-rose-300 mx-auto mb-4"></div>
+                <p class="cursive text-3xl">With Love ❤️</p>
+            </div>
         </div>
-    </footer>
+    </section>
 
     <script>
-        // 1. Typewriter
-        const text = "Happy Birthday,";
-        let i = 0;
-        function typeWriter() {
-            if (i < text.length) {
-                document.getElementById("typewriter").innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 120);
-            } else {
-                gsap.to("#hero-name", { opacity: 1, y: 0, duration: 1.5, ease: "back.out(1.7)" });
-                gsap.to("#hero-sub", { opacity: 1, duration: 2, delay: 0.5 });
-                gsap.to("#scroll-hint", { opacity: 1, delay: 1 });
-            }
-        }
+        gsap.registerPlugin(ScrollTrigger);
 
-        // 2. Floating Hearts
+        // 1. Initial High-End Reveal
+        window.addEventListener('load', () => {
+            const tl = gsap.timeline();
+            tl.to("#hero-title", { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" })
+              .to("#hero-line", { opacity: 1, width: 96, duration: 1 }, "-=0.5")
+              .to("#hero-name", { opacity: 1, duration: 1.5 }, "-=0.5");
+        });
+
+        // 2. Floating Hearts (Upscale style)
         function createHeart() {
             const container = document.getElementById('heart-container');
             const heart = document.createElement('div');
-            heart.innerHTML = '❤️';
-            heart.className = 'heart text-xl';
+            heart.innerHTML = '❤';
+            heart.style.position = 'absolute';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.top = '105vh';
-            heart.style.opacity = Math.random();
+            heart.style.top = '110vh';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            heart.style.color = '#e7a3a3';
+            heart.style.filter = 'blur(1px)';
             container.appendChild(heart);
 
             gsap.to(heart, {
-                y: '-110vh',
-                x: (Math.random() - 0.5) * 300,
-                rotation: Math.random() * 360,
-                duration: 6 + Math.random() * 4,
+                y: '-120vh',
+                x: (Math.random() - 0.5) * 200,
+                opacity: 0,
+                duration: 8 + Math.random() * 4,
                 ease: "none",
                 onComplete: () => heart.remove()
+            });
+        }
+        setInterval(createHeart, 600);
+
+        // 3. Countdown Logic (Set Date to Her Birthday)
+        const bday = new Date("2024-05-20T00:00:00").getTime(); 
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = bday - now;
+            if (diff < 0) return;
+            document.getElementById("days").innerText = Math.floor(diff / 86400000);
+            document.getElementById("hours").innerText = Math.floor((diff % 86400000) / 3600000);
+            document.getElementById("minutes").innerText = Math.floor((diff % 3600000) / 60000);
+            document.getElementById("seconds").innerText = Math.floor((diff % 60000) / 1000);
+        }
+        setInterval(updateTimer, 1000);
+
+        // 4. Navigation Dots Logic
+        const sections = document.querySelectorAll('.section');
+        const dots = document.querySelectorAll('.nav-dot');
+
+        window.addEventListener('scroll', () => {
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.getAttribute('data-sec') === current) {
+                    dot.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
